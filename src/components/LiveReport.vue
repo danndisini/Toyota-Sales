@@ -184,28 +184,42 @@ onMounted(async () => {
 <style scoped>
 .live-report {
   padding: 1rem;
+  max-width: 100%;
+  overflow-x: auto; /* 🔹 agar tabel bisa di-scroll di layar kecil */
 }
+
 .header {
   display: flex;
+  flex-wrap: wrap; /* 🔹 biar turun ke bawah jika layar sempit */
+  gap: 0.5rem;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }
+
 .actions {
   display: flex;
+  flex-wrap: wrap; /* 🔹 biar tombol & dropdown tidak mepet */
   gap: 0.5rem;
 }
+
 .filter-select {
-  padding: 0.4rem;
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 6px;
+  min-width: 120px;
+  font-size: 14px;
 }
+
 .btn {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
+  flex-shrink: 0; /* 🔹 cegah tombol mengecil berlebihan */
 }
+
 .refresh {
   background: #007bff;
   color: white;
@@ -214,14 +228,17 @@ onMounted(async () => {
   background: #28a745;
   color: white;
 }
+
 .report-table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 14px;
 }
 .report-table th,
 .report-table td {
   border: 1px solid #ddd;
   padding: 8px;
+  word-break: break-word; /* 🔹 teks panjang otomatis turun baris */
 }
 .report-table th {
   background: #f4f4f4;
@@ -236,8 +253,30 @@ onMounted(async () => {
   color: #007bff;
   text-decoration: underline;
   margin-right: 4px;
+  display: inline-block;
 }
 .no-photo {
   color: #dc3545;
+}
+
+/* 🔹 Media query khusus untuk layar HP */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .report-table th,
+  .report-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+  .btn {
+    font-size: 12px;
+    padding: 0.4rem 0.8rem;
+  }
 }
 </style>
